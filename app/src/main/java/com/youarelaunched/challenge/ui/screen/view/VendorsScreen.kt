@@ -49,7 +49,12 @@ fun VendorsScreen(
         snackbarHost = { ChatsumerSnackbar(it) }
     ) { paddings ->
         Column {
-            SearchView(onSearchQuery, onSearchClick)
+            SearchView(
+                onSearchQuery = onSearchQuery,
+                onSearchClick = onSearchClick,
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp, top = 24.dp, bottom = 2.dp),
+            )
             if (!uiState.vendors.isNullOrEmpty()) {
                 LazyColumn(
                     modifier = Modifier
@@ -68,7 +73,7 @@ fun VendorsScreen(
                     }
                 }
             } else
-                NoResult()
+                NoResult(modifier = Modifier)
         }
     }
 }

@@ -24,80 +24,81 @@ import com.youarelaunched.challenge.ui.theme.VendorAppTheme
 
 
 @Composable
-fun SearchView(onSearchQuery: (String) -> Unit, onSearchClick: (String) -> Unit) {
+fun SearchView(
+    onSearchQuery: (String) -> Unit,
+    onSearchClick: (String) -> Unit,
+    modifier: Modifier = Modifier
+) = Card(
+    modifier = modifier,
+    backgroundColor = White,
+    elevation = 10.dp,
+    shape = RoundedCornerShape(16.dp)
+) {
     var searchText by remember { mutableStateOf(TextFieldValue()) }
-    Card(
-        modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 24.dp, bottom = 2.dp),
-        backgroundColor = White,
-        elevation = 10.dp,
-        shape = RoundedCornerShape(16.dp)
-    ) {
-        TextField(
-            value = searchText,
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(
-                onSearch = {
-                    onSearchClick(searchText.text)
-                }
-            ),
-            placeholder = {
-                Text(
-                    text = "Search...",
-                    style = VendorAppTheme.typography.subtitle2.copy(color = VendorAppTheme.colors.text),
-                )
-            },
-            onValueChange = { value ->
-                onSearchQuery(value.text)
-                searchText = value
-            },
-            modifier = Modifier
-                .fillMaxWidth(),
-            textStyle = VendorAppTheme.typography.subtitle1.copy(color = VendorAppTheme.colors.textDark),
-            trailingIcon = {
-                if (searchText != TextFieldValue("")) {
-                    IconButton(
-                        onClick = {
-                            searchText =
-                                TextFieldValue("")
-                            onSearchClick(searchText.text)
-                        }
-                    ) {
-                        Icon(
-                            Icons.Default.Close,
-                            contentDescription = "",
-                            modifier = Modifier
-                                .padding(15.dp)
-                                .size(24.dp)
-                        )
-                    }
-                } else {
-                    IconButton(
-                        onClick = {
-                            onSearchClick(searchText.text)
-                        },
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_search),
-                            contentDescription = "Search",
-                            modifier = Modifier
-                                .padding(15.dp)
-                                .size(24.dp)
-                        )
-                    }
-                }
-            },
-            singleLine = true,
-            shape = RectangleShape,
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = Gray,
-                cursorColor = Gray,
-                trailingIconColor = Gray,
-                backgroundColor = White,
-                focusedIndicatorColor = Transparent,
-                unfocusedIndicatorColor = Transparent,
-                disabledIndicatorColor = Transparent
+    TextField(
+        value = searchText,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+        keyboardActions = KeyboardActions(
+            onSearch = {
+                onSearchClick(searchText.text)
+            }
+        ),
+        placeholder = {
+            Text(
+                text = "Search...",
+                style = VendorAppTheme.typography.subtitle2.copy(color = VendorAppTheme.colors.text),
             )
+        },
+        onValueChange = { value ->
+            onSearchQuery(value.text)
+            searchText = value
+        },
+        modifier = Modifier
+            .fillMaxWidth(),
+        textStyle = VendorAppTheme.typography.subtitle1.copy(color = VendorAppTheme.colors.textDark),
+        trailingIcon = {
+            if (searchText != TextFieldValue("")) {
+                IconButton(
+                    onClick = {
+                        searchText =
+                            TextFieldValue("")
+                        onSearchClick(searchText.text)
+                    }
+                ) {
+                    Icon(
+                        Icons.Default.Close,
+                        contentDescription = "",
+                        modifier = Modifier
+                            .padding(15.dp)
+                            .size(24.dp)
+                    )
+                }
+            } else {
+                IconButton(
+                    onClick = {
+                        onSearchClick(searchText.text)
+                    },
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_search),
+                        contentDescription = "Search",
+                        modifier = Modifier
+                            .padding(15.dp)
+                            .size(24.dp)
+                    )
+                }
+            }
+        },
+        singleLine = true,
+        shape = RectangleShape,
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Gray,
+            cursorColor = Gray,
+            trailingIconColor = Gray,
+            backgroundColor = White,
+            focusedIndicatorColor = Transparent,
+            unfocusedIndicatorColor = Transparent,
+            disabledIndicatorColor = Transparent
         )
-    }
+    )
 }
