@@ -11,7 +11,6 @@ import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 
-
 class VendorTest {
     private lateinit var viewModel: VendorsVM
 
