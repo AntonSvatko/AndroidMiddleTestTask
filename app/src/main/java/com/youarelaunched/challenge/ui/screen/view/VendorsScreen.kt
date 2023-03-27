@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import com.youarelaunched.challenge.ui.screen.state.VendorsScreenUiState
 import com.youarelaunched.challenge.ui.screen.view.components.ChatsumerSnackbar
+import com.youarelaunched.challenge.ui.screen.view.components.NoResult
 import com.youarelaunched.challenge.ui.screen.view.components.SearchView
 import com.youarelaunched.challenge.ui.screen.view.components.VendorItem
 import com.youarelaunched.challenge.ui.theme.VendorAppTheme
@@ -28,8 +29,9 @@ fun VendorsRoute(
     VendorsScreen(
         uiState = uiState,
         onSearchQuery = {
-
+            viewModel.searchQuery.value = it
         }, onSearchClick = {
+            viewModel.getVendors(it)
             keyboardController?.hide()
         }
     )
@@ -65,7 +67,8 @@ fun VendorsScreen(
                         )
                     }
                 }
-            }
+            } else
+                NoResult()
         }
     }
 }
