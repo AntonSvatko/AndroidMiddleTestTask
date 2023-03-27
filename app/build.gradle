@@ -59,6 +59,7 @@ android {
 dependencies {
 
     implementation coroutines.lib
+    implementation coroutines.libTest
 
     implementation lifecycle.viewModelCompose
 
@@ -70,6 +71,8 @@ dependencies {
     implementation compose.foundationLayout
     implementation compose.uiToolingPreview
     implementation compose.constraintLayout
+    implementation compose.uiTest
+    implementation compose.uiTestManifest
 
     implementation coil.img
     implementation coil.svg
@@ -80,4 +83,6 @@ dependencies {
     kapt hiltDependencies.kapt
 
     implementation retrofit.jsonConverter
+
+    testImplementation junit.lib
 }
